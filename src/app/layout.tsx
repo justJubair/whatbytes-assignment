@@ -30,8 +30,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Topbar />
-        <Sidebar />
-        {children}
+        <div className="grid grid-cols-8 relative">
+          <div className="col-span-1 min-h-screen border-gray-200 border-r-1">
+            <Sidebar />
+          </div>
+          <div className="col-span-">{children}</div>
+        </div>
       </body>
     </html>
   );

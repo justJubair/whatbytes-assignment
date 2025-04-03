@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const Sidebar = () => {
   return (
-    <div className="min-h-screen w-60 flex-col p-4 border-gray-100 border-r-1">
-      <Link href="/" className="flex items-center mt-20 gap-2 text-gray-700">
+    <div className="flex-col p-4 fixed">
+      <Link href="/" className="flex items-center mt-25 gap-2  text-gray-700">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
