@@ -1,9 +1,17 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
+  const pathname = usePathname();
   return (
     <div className="flex-col p-4 fixed">
-      <Link href="/" className="flex items-center mt-25 gap-2  text-gray-700">
+      <Link
+        href="/"
+        className={`${
+          pathname === "/" ? "text-blue-700" : "text-gray-700"
+        } flex items-center mt-25 gap-2  `}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -22,7 +30,9 @@ const Sidebar = () => {
       </Link>
       <Link
         href="/skill-test"
-        className="flex items-center gap-2 text-gray-700 my-6"
+        className={`${
+          pathname === "/skill-test" ? "text-blue-700" : "text-gray-700"
+        } flex items-center gap-2  my-6`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +53,9 @@ const Sidebar = () => {
       </Link>
       <Link
         href="/internship"
-        className="flex items-center gap-2 text-gray-700"
+        className={`${
+          pathname === "/internship" ? "text-blue-700" : "text-gray-700"
+        } flex items-center gap-2`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
