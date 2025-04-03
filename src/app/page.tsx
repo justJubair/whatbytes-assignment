@@ -1,8 +1,10 @@
+import Underconstruction from "@/components/shared/Underconstruction";
+
 const DashboardPage = () => {
   return (
-    <div>
-      <p> HELLO I Am Dashbaord page </p>
-    </div>
+    <>
+      <Underconstruction pageName="Home" />
+    </>
   );
 };
 export default DashboardPage;

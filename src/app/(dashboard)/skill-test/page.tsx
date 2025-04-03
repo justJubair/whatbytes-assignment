@@ -1,7 +1,9 @@
+import HtmlScoreUpdate from "@/components/dashboard/HtmlScoreUpdate";
+
 const SkillTest = () => {
   return (
     <div>
-      <p> HELLO I Am Skill test page </p>
+      <HtmlScoreUpdate />
     </div>
   );
 };

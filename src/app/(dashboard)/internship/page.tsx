@@ -1,8 +1,13 @@
+"use client";
+import Underconstruction from "@/components/shared/Underconstruction";
+import { usePathname } from "next/navigation";
+
 const InternshipPage = () => {
+  const pathname = usePathname();
   return (
-    <div>
-      <p> HELLO I Am Internship page </p>
-    </div>
+    <>
+      <Underconstruction pageName={pathname} />
+    </>
   );
 };
 export default InternshipPage;
