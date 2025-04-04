@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
+// import { Button } from "../ui/button";
 import htmlLogo from "@assets/html-logo.png";
 import UpdateScoreForm from "./UpdateScoreForm";
 
-const HtmlScoreUpdate = () => {
+const HtmlScoreUpdate = ({ ...props }) => {
   return (
-    <div className="">
+    <div className="w-full">
       <div className="flex w-full py-5 px-4 justify-between  rounded-xl items-center gap-4 border-1 border-gray-200">
         <div className="flex items-center gap-4">
           <Image
@@ -24,7 +24,7 @@ const HtmlScoreUpdate = () => {
         </div>
 
         {/* <Button className="bg-blue-900">Update</Button> */}
-        <UpdateScoreForm />
+        <UpdateScoreForm {...props} />
       </div>
     </div>
   );

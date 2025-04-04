@@ -1,9 +1,9 @@
 import { PercentageGraph } from "../ui/PercentageGraph";
 
-const ComparisonGraph = () => {
+const ComparisonGraph = ({ percentile }: { percentile: number | string }) => {
   return (
     <div>
-      <PercentageGraph />
+      <PercentageGraph userPercentile={percentile} />
     </div>
   );
 };

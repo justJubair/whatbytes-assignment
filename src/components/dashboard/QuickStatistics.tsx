@@ -1,4 +1,4 @@
-const QuickStatistics = () => {
+const QuickStatistics = ({ ...props }) => {
   return (
     <div className="rounded-xl items-center gap-4  py-6 px-4 border-1 border-gray-200">
       <h6 className="text-lg font-bold mb-1">Quick Statistics</h6>
@@ -22,7 +22,7 @@ const QuickStatistics = () => {
           </div>
 
           <div>
-            <h6 className="text-lg font-bold">1</h6>
+            <h6 className="text-lg font-bold">{props.rank}</h6>
             <p className="uppercase text-sm text-gray-500 text-nowrap">
               your rank
             </p>
@@ -47,7 +47,7 @@ const QuickStatistics = () => {
           </div>
 
           <div>
-            <h6 className="text-lg font-bold">30%</h6>
+            <h6 className="text-lg font-bold">{props.percentile}%</h6>
             <p className="uppercase text-sm text-gray-500 text-nowrap">
               percentile
             </p>
@@ -72,7 +72,7 @@ const QuickStatistics = () => {
           </div>
 
           <div>
-            <h6 className="text-lg font-bold">10/15</h6>
+            <h6 className="text-lg font-bold">{props.score}/15</h6>
             <p className="uppercase text-sm text-gray-500 text-nowrap">
               correct answers
             </p>

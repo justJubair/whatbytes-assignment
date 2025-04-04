@@ -16,16 +16,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-const chartData = [{ score: 15, fill: "#6e9dfa" }];
 
-const chartConfig = {
-  score: {
-    label: "Score",
-  },
-} satisfies ChartConfig;
+export function QuestionAnalysis({ score }: { score: number | string }) {
+  const chartData = [{ score: score, fill: "#6e9dfa" }];
 
-export function QuestionAnalysis() {
-  const normalizedEndAngle = (chartData[0].score / 15) * 360;
+  const chartConfig = {
+    score: {
+      label: "Score",
+    },
+  } satisfies ChartConfig;
+  const normalizedEndAngle = ((chartData[0].score as number) / 15) * 360;
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">

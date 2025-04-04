@@ -37,11 +37,11 @@ const chartConfig = {
 export function PercentageGraph({
   userPercentile,
 }: {
-  userPercentile: number;
+  userPercentile: number | string;
 }) {
   const closestDataPoint = mockData.reduce((prev, curr) =>
-    Math.abs(curr.percentile - userPercentile) <
-    Math.abs(prev.percentile - userPercentile)
+    Math.abs(curr.percentile - Number(userPercentile)) <
+    Math.abs(prev.percentile - Number(userPercentile))
       ? curr
       : prev
   );

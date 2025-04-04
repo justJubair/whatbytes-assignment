@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -11,133 +14,181 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
-const UpdateScoreForm = () => {
+const UpdateScoreForm = ({
+  rank,
+  percentile,
+  score,
+  setRank,
+  setPercentile,
+  setScore,
+}: {
+  rank: number;
+  percentile: number;
+  score: number;
+  setRank: (param: number) => void;
+  setPercentile: (param: number) => void;
+  setScore: (param: number) => void;
+}) => {
+  const [open, setOpen] = useState(false); // Controls modal visibility
+
+  // Local state to store temporary form input
+  const [formData, setFormData] = useState({
+    rank,
+    percentile,
+    score,
+  });
+
+  // Validation errors
+  const [errors, setErrors] = useState({
+    rank: "",
+    percentile: "",
+    score: "",
+  });
+
+  // Handle Form Submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors = { rank: "", percentile: "", score: "" };
+    let isValid = true;
+
+    if (!formData.rank) {
+      newErrors.rank = "Rank is required!";
+      isValid = false;
+    }
+    if (
+      !formData.percentile ||
+      isNaN(Number(formData.percentile)) ||
+      Number(formData.percentile) < 0 ||
+      Number(formData.percentile) > 100
+    ) {
+      newErrors.percentile = "Enter a valid percentile (0-100)!";
+      isValid = false;
+    }
+    if (
+      !formData.score ||
+      isNaN(Number(formData.score)) ||
+      Number(formData.score) < 0 ||
+      Number(formData.score) > 15
+    ) {
+      newErrors.score = "Enter a valid score (0-15)!";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (isValid) {
+      // Update parent state only on successful submit
+      setRank(formData.rank);
+      setPercentile(formData.percentile);
+      setScore(formData.score);
+
+      console.log("Updated Data:", {
+        rank: formData.rank,
+        percentile: Number(formData.percentile),
+        score: Number(formData.score),
+      });
+
+      setOpen(false); // Close modal on successful submit
+    }
+  };
+
   return (
-    <div className="">
-      <Dialog>
+    <div>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
         </DialogTrigger>
-        <DialogContent className="">
+        <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>Edit Profile</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when youre done.
+              Update your profile details and save changes.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col gap-4 py-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 py-4">
+            {/* Rank Input */}
             <div className="flex justify-between items-center gap-4">
               <Label htmlFor="rank" className="text-right">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width={24}
-                  height={24}
-                  color={"#062af6"}
-                  fill={"none"}
-                >
-                  <path
-                    d="M10.5 8.5L12.5 7V17"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <p className="text-nowrap">
-                  Update your <b>Rank</b>
-                </p>
+                Rank
               </Label>
               <Input
                 id="rank"
-                defaultValue="Pedro Duarte"
+                type="number"
+                value={formData.rank}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, rank: e.target.value }))
+                }
                 className="w-[40%]"
+                placeholder="Enter your rank"
               />
             </div>
+            {errors.rank && (
+              <p className="text-red-500 text-sm">{errors.rank}</p>
+            )}
+
+            {/* Percentile Input */}
             <div className="flex justify-between items-center gap-4">
               <Label htmlFor="percentile" className="text-right">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width={24}
-                  height={24}
-                  color={"#062af6"}
-                  fill={"none"}
-                >
-                  <path
-                    d="M9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10C15 12.0786 12.1196 13.9172 10.3503 14.8505C9.54685 15.2743 9 16.0917 9 17H15"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <p className="text-nowrap">
-                  Update your <b>Percentile</b>
-                </p>
+                Percentile (%)
               </Label>
               <Input
                 id="percentile"
-                defaultValue="Pedro Duarte"
+                type="number"
+                value={formData.percentile}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    percentile: e.target.value,
+                  }))
+                }
                 className="w-[40%]"
+                placeholder="Enter percentile (0-100)"
+                min="0"
+                max="100"
               />
             </div>
+            {errors.percentile && (
+              <p className="text-red-500 text-sm">{errors.percentile}</p>
+            )}
+
+            {/* Score Input */}
             <div className="flex justify-between items-center gap-4">
               <Label htmlFor="score" className="text-right">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width={24}
-                  height={24}
-                  color={"#062af6"}
-                  fill={"none"}
-                >
-                  <path
-                    d="M12.5 12H11.5M12.5 12C13.8807 12 15 10.8807 15 9.5C15 8.11929 13.8807 7 12.5 7H11.5C10.1193 7 9 8.11929 9 9.5M12.5 12C13.8807 12 15 13.1193 15 14.5C15 15.8807 13.8807 17 12.5 17H11.5C10.1193 17 9 15.8807 9 14.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <p className="text-nowrap">
-                  Update your <b>Score (out of 15)</b>
-                </p>
+                Score (out of 15)
               </Label>
               <Input
                 id="score"
-                defaultValue="Pedro Duarte"
+                type="number"
+                value={formData.score}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, score: e.target.value }))
+                }
                 className="w-[40%]"
+                placeholder="Enter score (0-15)"
+                min="0"
+                max="15"
               />
             </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
+            {errors.score && (
+              <p className="text-red-500 text-sm">{errors.score}</p>
+            )}
+
+            <DialogFooter className="flex justify-end gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button type="submit">Save changes</Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>
   );
 };
+
 export default UpdateScoreForm;
