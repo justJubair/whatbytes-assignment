@@ -11,9 +11,9 @@ const SkillTest = () => {
   const [percentile, setPercentile] = useState(33);
   const [score, setScore] = useState(7);
   return (
-    <div className="mt-28 px-10 pb-10">
+    <div className="mt-28 px-4 pb-10 xl:px-10">
       <p className="font-medium text-gray-600 mb-5">Skill Test</p>
-      <div className="flex items-start gap-10 ">
+      <div className="flex flex-col items-start gap-10 xl:flex-row">
         <div className="w-full space-y-6">
           <HtmlScoreUpdate
             rank={rank}

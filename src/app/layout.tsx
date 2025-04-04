@@ -31,10 +31,12 @@ export default function RootLayout({
       >
         <Topbar />
         <div className="grid grid-cols-8 relative overflow-hidden">
-          <div className="col-span-1 min-h-screen border-gray-200 border-r-1">
+          <div className="col-span-1 min-h-screen border-gray-200 border-r-1 hidden xl:inline">
             <Sidebar />
           </div>
-          <div className="col-span-7 w-full h-full">{children}</div>
+          <div className="col-span-8 w-full h-full xl:col-span-7">
+            {children}
+          </div>
         </div>
       </body>
     </html>
