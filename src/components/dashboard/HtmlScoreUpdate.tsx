@@ -6,7 +6,7 @@ const HtmlScoreUpdate = () => {
   return (
     <div className="mt-25 ml-10">
       <p className="font-medium text-gray-600">Skill Test</p>
-      <div className="flex items-center gap-4 mt-10">
+      <div className="flex w-[42rem] rounded-xl items-center gap-4 mt-10 py-6 px-4 border-1 border-gray-200">
         <Image
           className="-mx-8 w-30"
           src={htmlLogo}
@@ -14,7 +14,7 @@ const HtmlScoreUpdate = () => {
           height={400}
           alt="html-logo"
         />
-        <div className=" text-nowrap">
+        <div className="text-nowrap">
           <h6 className="text-lg font-bold">Hyper Text Markup Language</h6>
           <p className="text-gray-600 font-medium">
             Questions: 08 | Duration: 15 mins | Submitted on 04 April 2025
