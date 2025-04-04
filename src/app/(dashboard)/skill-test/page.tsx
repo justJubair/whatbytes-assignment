@@ -14,7 +14,7 @@ const SkillTest = () => {
           <QuickStatistics />
           <ComparisonGraph />
         </div>
-        <div className="w-full">
+        <div className="w-full space-y-6">
           <Syllabus />
           <QuestionAnalysis />
         </div>

@@ -1,6 +1,5 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import {
   Label,
   PolarGrid,
@@ -13,31 +12,31 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-const chartData = [
-  { browser: "safari", visitors: 1260, fill: "var(--color-safari)" },
-];
+const chartData = [{ score: 15, fill: "#6e9dfa" }];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
+  score: {
+    label: "Score",
   },
 } satisfies ChartConfig;
 
 export function QuestionAnalysis() {
+  const normalizedEndAngle = (chartData[0].score / 15) * 360;
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Radial Chart - Shape</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle className="flex items-center justify-between mb-1">
+          <h6 className="text-lg font-bold">Question Analysis</h6>
+          <p className="font-black text-[#447ff4]">{chartData[0].score}/15</p>
+        </CardTitle>
+        <CardDescription className="text-base">
+          <b> You scored {chartData[0].score} questions correct out of 15.</b>{" "}
+          However it still needs some improvements{" "}
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -46,7 +45,7 @@ export function QuestionAnalysis() {
         >
           <RadialBarChart
             data={chartData}
-            endAngle={100}
+            endAngle={normalizedEndAngle}
             innerRadius={80}
             outerRadius={140}
           >
@@ -55,35 +54,44 @@ export function QuestionAnalysis() {
               radialLines={false}
               stroke="none"
               className="first:fill-muted last:fill-background"
-              polarRadius={[86, 74]}
+              polarRadius={[92, 68]}
             />
-            <RadialBar dataKey="visitors" background />
+            <RadialBar dataKey="score" background />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {
                     return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
+                      <svg
+                        x={(viewBox.cx as number) - 19}
+                        y={(viewBox.cy as number) - 19}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width={40}
+                        height={40}
+                        color={"#ea3c3c"}
+                        fill={"none"}
                       >
-                        <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
-                        >
-                          {chartData[0].visitors.toLocaleString()}
-                        </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
-                        >
-                          Visitors
-                        </tspan>
-                      </text>
+                        <path
+                          d="M15.1312 2.5C14.1462 2.17555 13.0936 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 10.9548 21.8396 9.94704 21.5422 9"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M19.5 4.5L12 12M19.5 4.5V2M19.5 4.5H22"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                        />
+                      </svg>
                     );
                   }
                 }}
