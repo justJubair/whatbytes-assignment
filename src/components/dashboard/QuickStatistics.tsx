@@ -1,7 +1,7 @@
 const QuickStatistics = () => {
   return (
-    <div className="ml-10 rounded-xl w-[42rem] items-center gap-4 mt-5 py-6 px-4 border-1 border-gray-200">
-      <h6 className="text-lg font-bold">Quick Statistics</h6>
+    <div className="rounded-xl items-center gap-4 mt-5 py-6 px-4 border-1 border-gray-200">
+      <h6 className="text-lg font-bold mb-1">Quick Statistics</h6>
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-4 border-r-1 py-2 px-4 border-gray-200">
           <div className="bg-gray-100 p-2 rounded-full">

@@ -4,9 +4,8 @@ import htmlLogo from "@assets/html-logo.png";
 
 const HtmlScoreUpdate = () => {
   return (
-    <div className="mt-25 ml-10">
-      <p className="font-medium text-gray-600">Skill Test</p>
-      <div className="flex w-[42rem] rounded-xl items-center gap-4 mt-10 py-6 px-4 border-1 border-gray-200">
+    <div>
+      <div className="flex w-full py-5 px-4  rounded-xl items-center gap-4 border-1 border-gray-200">
         <Image
           className="-mx-8 w-30"
           src={htmlLogo}
