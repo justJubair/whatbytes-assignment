@@ -4,7 +4,7 @@ import Image from "next/image";
 const Topbar = () => {
   return (
     <div className="">
-      <div className="fixed z-10 top-0 border-gray-200 border-b-1 w-full flex items-center justify-between">
+      <div className="fixed z-50 bg-white top-0 border-gray-200 border-b-1 w-full flex items-center justify-between">
         <Image
           className="w-60"
           src={logo}
