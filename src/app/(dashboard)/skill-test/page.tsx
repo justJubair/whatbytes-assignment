@@ -1,5 +1,6 @@
 import ComparisonGraph from "@/components/dashboard/ComparisonGraph";
 import HtmlScoreUpdate from "@/components/dashboard/HtmlScoreUpdate";
+import { QuestionAnalysis } from "@/components/dashboard/QuestionAnalysis";
 import QuickStatistics from "@/components/dashboard/QuickStatistics";
 import Syllabus from "@/components/dashboard/Syllabus";
 
@@ -15,6 +16,7 @@ const SkillTest = () => {
         </div>
         <div className="w-full">
           <Syllabus />
+          <QuestionAnalysis />
         </div>
       </div>
     </div>
