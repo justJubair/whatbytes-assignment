@@ -105,22 +105,21 @@ export function PercentageGraph({
               type="monotone"
               stroke="#9033ff"
               strokeWidth={2}
-              dot={({ cx, cy, payload }) => {
-                if (payload.percentile === closestDataPoint.percentile) {
-                  return (
-                    <circle
-                      key={Math.random() * 1000}
-                      cx={cx}
-                      cy={cy}
-                      r={6}
-                      fill="#6906f6"
-                      stroke="black"
-                      strokeWidth={2}
-                    />
-                  );
-                }
-                return null;
-              }}
+              dot={({ cx, cy, payload }) =>
+                payload.percentile === closestDataPoint.percentile ? (
+                  <circle
+                    key={Math.random() * 100} // Use a unique key related to the data
+                    cx={cx}
+                    cy={cy}
+                    r={6}
+                    fill="#6906f6"
+                    stroke="black"
+                    strokeWidth={2}
+                  />
+                ) : (
+                  <div key={Math.random() * 2000}></div> // Return an empty fragment instead of null
+                )
+              }
             />
 
             <ReferenceLine

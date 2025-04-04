@@ -97,7 +97,7 @@ const UpdateScoreForm = ({
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Edit Profile</Button>
+          <Button className="bg-blue-900 hover: cursor-pointer">Update</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -117,7 +117,10 @@ const UpdateScoreForm = ({
                 type="number"
                 value={formData.rank}
                 onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, rank: e.target.value }))
+                  setFormData((prev) => ({
+                    ...prev,
+                    rank: Number(e.target.value),
+                  }))
                 }
                 className="w-[40%]"
                 placeholder="Enter your rank"
@@ -139,7 +142,7 @@ const UpdateScoreForm = ({
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    percentile: e.target.value,
+                    percentile: Number(e.target.value),
                   }))
                 }
                 className="w-[40%]"
@@ -162,7 +165,10 @@ const UpdateScoreForm = ({
                 type="number"
                 value={formData.score}
                 onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, score: e.target.value }))
+                  setFormData((prev) => ({
+                    ...prev,
+                    score: Number(e.target.value),
+                  }))
                 }
                 className="w-[40%]"
                 placeholder="Enter score (0-15)"
@@ -178,11 +184,14 @@ const UpdateScoreForm = ({
               <Button
                 type="button"
                 variant="outline"
+                className="hover:cursor-pointer"
                 onClick={() => setOpen(false)}
               >
                 Cancel
               </Button>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit" className="hover:cursor-pointer">
+                Save changes
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>
