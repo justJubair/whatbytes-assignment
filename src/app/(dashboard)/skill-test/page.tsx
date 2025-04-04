@@ -8,7 +8,7 @@ const SkillTest = () => {
     <div className="mt-28 px-10">
       <p className="font-medium text-gray-600 mb-5">Skill Test</p>
       <div className="flex items-start gap-10 ">
-        <div className="w-full">
+        <div className="w-full space-y-6">
           <HtmlScoreUpdate />
           <QuickStatistics />
           <ComparisonGraph />

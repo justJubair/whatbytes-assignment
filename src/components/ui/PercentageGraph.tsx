@@ -1,13 +1,11 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -18,12 +16,11 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { percentile: "0", desktop: 186, mobile: 80 },
+  { percentile: "25", desktop: 305, mobile: 200 },
+  { percentile: "50", desktop: 237, mobile: 120 },
+  { percentile: "75", desktop: 73, mobile: 190 },
+  { percentile: "100", desktop: 209, mobile: 130 },
 ];
 
 const chartConfig = {
@@ -41,8 +38,37 @@ export function PercentageGraph() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Line Chart - Label</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle className="text-lg font-bold mb-3">
+          Comparison Graph
+        </CardTitle>
+        <CardDescription className="text-base flex justify-between items-center">
+          <p className="w-[80%]">
+            <b> You scored 30% percentile</b> which is lower than the average
+            percentile 72% of all the engineers who took this assessment
+          </p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width={24}
+            height={24}
+            color={"#f36b58"}
+            fill={"none"}
+          >
+            <path
+              d="M21 21H10C6.70017 21 5.05025 21 4.02513 19.9749C3 18.9497 3 17.2998 3 14V3"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <path
+              d="M17.7048 9.33333L14.8311 13.9845C14.4123 14.6623 13.9369 15.686 13.0749 15.5344C12.0611 15.356 11.5742 13.8449 10.7026 13.3445C9.99285 12.9371 9.47971 13.4281 9.06475 14M21 4L19.1465 7M5 20L7.52632 16.2667"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -57,7 +83,7 @@ export function PercentageGraph() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="percentile"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
@@ -70,10 +96,10 @@ export function PercentageGraph() {
             <Line
               dataKey="desktop"
               type="natural"
-              stroke="red"
-              strokeWidth={2}
+              stroke="#9033ff"
+              strokeWidth={1}
               dot={{
-                fill: "var(--color-desktop)",
+                fill: "#ac6bfa",
               }}
               activeDot={{
                 r: 6,
@@ -89,14 +115,6 @@ export function PercentageGraph() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
     </Card>
   );
 }
